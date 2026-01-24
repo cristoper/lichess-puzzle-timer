@@ -4,7 +4,7 @@ class LCSettings {
         this.enabled = true;
         this.slowMode = true;
         this.autoFail = true;
-        this.startTime = 34 * 1000; // ms
+        this.startTime = 60 * 1000; // ms
         this.events = new EventTarget();
 
         const template =
@@ -47,19 +47,11 @@ class LCSettings {
         this.autoFailBtn = document.getElementById('autofail-btn');
         this.doneBtn = document.getElementById('doneBtn');
 
-        // set DOM values
-        this.minInput.value = Math.floor(this.startTime / 1000 / 60);
-        this.timeInput.value = Math.floor(this.startTime / 1000 % 60);
-        this.modeSlow.checked = this.slowMode;
-        this.modeFast.checked = !this.slowMode;
-        this.autoFailBtn.checked = this.autoFail;
+        // load settings
+        this.loadSettings();
         
-        // only show autofail when Blitz mode selected
-        if (this.modeSlow.checked) {
-            document.querySelector('.lcsettings-row').style.visibility = 'hidden';
-        }
         const modeGroup = document.getElementById('lctimer-mode');
-        modeGroup.addEventListener('change', (e) => {
+        modeGroup.addEventListener('change', () => {
             if (this.modeSlow.checked) {
                 document.querySelector('.lcsettings-row').style.visibility = 'hidden';
             } else {
@@ -87,6 +79,8 @@ class LCSettings {
                 didUpdate = true;
             }
 
+            this.saveSettings();
+
             if (didUpdate) {
                 const settingsUpdated = new CustomEvent('settingsChanged', {
                     detail: {settings: this}
@@ -95,6 +89,47 @@ class LCSettings {
             }
         });
 
+    }
+
+    updateDOM() {
+        this.minInput.value = Math.floor(this.startTime / 1000 / 60);
+        this.timeInput.value = Math.floor(this.startTime / 1000 % 60);
+        this.modeSlow.checked = this.slowMode;
+        this.modeFast.checked = !this.slowMode;
+        this.autoFailBtn.checked = this.autoFail;
+        // only show autofail when Blitz mode selected
+        if (this.modeSlow.checked) {
+            document.querySelector('.lcsettings-row').style.visibility = 'hidden';
+        } else {
+            document.querySelector('.lcsettings-row').style.visibility = 'visible';
+        }
+    }
+
+    // load settings from chrome.local
+    async loadSettings() {
+        const settings = chrome.storage.local.get("settings").then((items) => {
+            console.log("loaded settings: ", items);
+            if (items.settings) {
+                this.enabled = items.settings.enabled;
+                this.slowMode = items.settings.slowMode;
+                this.autoFail = items.settings.autoFail;
+                this.startTime = items.settings.startTime;
+            }
+            this.updateDOM();
+            const settingsUpdated = new CustomEvent('settingsChanged', {
+                detail: {settings: this}
+            });
+            this.events.dispatchEvent(settingsUpdated);
+        });
+    }
+
+    saveSettings() {
+        chrome.storage.local.set({"settings": {
+            enabled: this.enabled,
+            slowMode: this.slowMode,
+            autoFail: this.autoFail,
+            startTime: this.startTime
+        }});
     }
 
     showDialog() {
@@ -115,11 +150,11 @@ class LCPuzzleTimer {
         this.startTime = null;
 
         this.flashBG = false;
-        
+
         const template = `
 <div class="switch" role="button" title="Toggle Lichess Timer Extension">
-    <input id="lctimer-toggle-enabled" class="cmn-toggle cmn-toggle--subtle" type="checkbox">
-    <label for="lctimer-toggle-enabled"></label>
+<input id="lctimer-toggle-enabled" class="cmn-toggle cmn-toggle--subtle" type="checkbox">
+<label for="lctimer-toggle-enabled"></label>
 </div>
 
 <div id='lcpuzzletimer'><span id='lcminutes'>00</span><span id='lccolon'>:</span><span id='lcseconds'>00</span></div>
@@ -156,6 +191,7 @@ class LCPuzzleTimer {
                 this.settings.enabled = false;
                 this.reset();
             }
+            this.settings.saveSettings();
         });
 
         // We detect when a new puzzle starts by detecting when
@@ -230,8 +266,8 @@ class LCPuzzleTimer {
         }
         this.render();
     }
-    
-        
+
+
     tick() {
         if (this.running) {
             const now = Date.now();
@@ -295,7 +331,7 @@ class LCPuzzleTimer {
             } else {
                 this.lccolon.style.opacity = 1.0;
             }
-        this.lastColonFlash = Date.now();
+            this.lastColonFlash = Date.now();
         }
     }
 

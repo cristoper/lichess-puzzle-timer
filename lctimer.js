@@ -62,9 +62,13 @@ class LCSettings {
         // when dialog closes, update settings and emit event
         this.settingsDialog.addEventListener('close', (e) => {
             let didUpdate = false;
-            const newTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;
+            let newTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;
             const newMode = this.modeSlow.checked;
             const newAutoFail = this.autoFailBtn.checked;
+
+            if (newTime < 1000) {
+                newTime = this.startTime;
+            }
 
             if (this.startTime != newTime) {
                 this.startTime = newTime;
@@ -80,6 +84,8 @@ class LCSettings {
             }
 
             this.saveSettings();
+            this.updateDOM(); // to nromalize minute and second text inputs
+
 
             if (didUpdate) {
                 const settingsUpdated = new CustomEvent('settingsChanged', {

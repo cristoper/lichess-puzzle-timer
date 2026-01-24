@@ -28,7 +28,7 @@ class LCSettings {
     </group>
 
     <div class="lcsettings-row">
-        <label for="autofail-btn">Autofail (blitz):</label>
+        <label for="autofail-btn">Autofail (lose points if too slow):</label>
         <div class="toggle">
             <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="true" type="checkbox" checked="checked">
             <label for="autofail-btn"></label>
@@ -53,6 +53,19 @@ class LCSettings {
         this.modeSlow.checked = this.slowMode;
         this.modeFast.checked = !this.slowMode;
         this.autoFailBtn.checked = this.autoFail;
+        
+        // only show autofail when Blitz mode selected
+        if (this.modeSlow.checked) {
+            document.querySelector('.lcsettings-row').style.visibility = 'hidden';
+        }
+        const modeGroup = document.getElementById('lctimer-mode');
+        modeGroup.addEventListener('change', (e) => {
+            if (this.modeSlow.checked) {
+                document.querySelector('.lcsettings-row').style.visibility = 'hidden';
+            } else {
+                document.querySelector('.lcsettings-row').style.visibility = 'visible';
+            }
+        });
 
         // when dialog closes, update settings and emit event
         this.settingsDialog.addEventListener('close', (e) => {

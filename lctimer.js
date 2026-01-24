@@ -176,7 +176,6 @@ class LCPuzzleTimer {
         container.insertAdjacentHTML('beforeend', template)
 
         this.board = document.querySelector("cg-board");
-        this.element = document.getElementById('lcpuzzletimer-container')
         this.lcminutes = document.getElementById('lcminutes')
         this.lcseconds = document.getElementById('lcseconds')
         this.lccolon = document.getElementById('lccolon')

@@ -5,6 +5,62 @@ class LCSettings {
         this.slowMode = true;
         this.autoFail = true;
         this.startTime = 34 * 1000; // ms
+
+        const template =
+`
+<dialog id='lctimer-settings'>
+
+    <div class="lctimer-set">
+        <input type="number" id="lctimer-min" min="0" max="59" value="0">
+        <label for="lctimer-min">Minutes</label>
+        <input type="number" id="lctimer-time" min="0" max="59" value="0">
+        <label for="lctimer-time">Seconds</label>
+    </div>
+
+    <group id='lctimer-mode' class='radio'>
+        <div>
+            <input id="lctimer-mode-slow" type="radio" value="slow" name="mode"><label for="lctimer-mode-slow">Thinking mode</label>
+        </div>
+        <div>
+            <input id="lctimer-mode-fast" type="radio" value="fast" name="mode" checked=""><label for="lctimer-mode-fast">Blitz mode</label>
+        </div>
+    </group>
+
+    <div class="toggle">
+        <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="true" type="checkbox" checked="checked">
+        <label for="autofail-btn"></label>
+    </div>
+        <label for="autofail-btn">Autofail (blitz)</label>
+
+    <form method="dialog"><button id="doneBtn" class="button">Done</button></form>
+</dialog>
+`
+        document.body.insertAdjacentHTML('beforeend', template);
+        this.settingsDialog = document.getElementById('lctimer-settings');
+        this.minInput = document.getElementById('lctimer-min');
+        this.timeInput = document.getElementById('lctimer-time');
+        this.modeSlow = document.getElementById('lctimer-mode-slow');
+        this.modeFast = document.getElementById('lctimer-mode-fast');
+        this.autoFailBtn = document.getElementById('autofail-btn');
+        this.doneBtn = document.getElementById('doneBtn');
+
+        // set DOM values
+        this.minInput.value = Math.floor(this.startTime / 1000 / 60);
+        this.timeInput.value = Math.floor(this.startTime / 1000 % 60);
+        this.modeSlow.checked = this.slowMode;
+        this.modeFast.checked = !this.slowMode;
+        this.autoFailBtn.checked = this.autoFail;
+
+        // when dialog closes, update settings and emit event
+        this.settingsDialog.addEventListener('close', (e) => {
+            this.startTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;
+            this.slowMode = this.modeSlow.checked;
+            this.autoFail = this.autoFailBtn.checked;
+        });
+    }
+
+    showDialog() {
+        this.settingsDialog.showModal();
     }
 }
 
@@ -23,33 +79,15 @@ class LCPuzzleTimer {
         this.flashBG = false;
         
         const template = `
-        <div class="switch" role="button" title="Toggle Lichess Timer Extension">
-            <input id="lctimer-toggle-enabled" class="cmn-toggle cmn-toggle--subtle" type="checkbox">
-            <label for="lctimer-toggle-enabled"></label>
-        </div>
+<div class="switch" role="button" title="Toggle Lichess Timer Extension">
+    <input id="lctimer-toggle-enabled" class="cmn-toggle cmn-toggle--subtle" type="checkbox">
+    <label for="lctimer-toggle-enabled"></label>
+</div>
 
-        <div id='lcpuzzletimer'><span id='lcminutes'>00</span><span id='lccolon'>:</span><span id='lcseconds'>00</span></div>
+<div id='lcpuzzletimer'><span id='lcminutes'>00</span><span id='lccolon'>:</span><span id='lcseconds'>00</span></div>
 
-        <button class="settings-gear" role="button" data-icon="" title="Lichess Puzzle Timer settings"></button>
-
-        <div id='lctimer-settings' style="display:none">
-            <div class="lctimer-set">
-                <input type="number" id="lctimer-min" min="0" max="59" value="0">
-                <label for="lctimer-min">Minutes</label>
-                <input type="number" id="lctimer-time" min="0" max="59" value="0">
-                <label for="lctimer-time">Seconds</label>
-            </div>
-            <div id='lctimer-mode' class='radio'>
-                <div>
-                    <input id="lctimer-mode-slow" class="checked_true" name="Slow" type="radio" value="slow"><label for="lctimer-mode-slow">Slow</label>
-                </div>
-                <div>
-                    <input id="lctimer-mode-fast" class="checked_false" name="Fast" type="radio" value="fast" checked=""><label for="lctimer-mode-fast">Fast</label>
-                </div>
-            </div>
-        </div>
-        `
-        
+<button class="settings-gear" role="button" data-icon="" id="lctimer-settings-btn" title="Lichess Puzzle Timer settings"></button>
+`
         container.insertAdjacentHTML('beforeend', template)
 
         this.board = document.querySelector("cg-board");
@@ -57,6 +95,11 @@ class LCPuzzleTimer {
         this.lcminutes = document.getElementById('lcminutes')
         this.lcseconds = document.getElementById('lcseconds')
         this.lccolon = document.getElementById('lccolon')
+
+        this.settingsButton = document.getElementById('lctimer-settings-btn');
+
+        // event listeners
+        this.settingsButton.addEventListener('click', this.clickedSettings.bind(this));
 
         this.enableButton = document.getElementById('lctimer-toggle-enabled');
         this.enableButton.addEventListener('change', (e) => {
@@ -90,6 +133,10 @@ class LCPuzzleTimer {
         cgobserver.observe(puzzletools, {childList: true, subtree: true});
 
         this.reset();
+    }
+
+    clickedSettings() {
+        this.settings.showDialog();
     }
 
     newPuzzle() {
@@ -187,7 +234,7 @@ class LCPuzzleTimer {
         const seconds = (this.time / 1000) % 60;
 
         let fixed = 1;
-        if (seconds > 30) {
+        if (seconds > 10) {
             fixed = 0;
         }
 

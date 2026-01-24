@@ -30,5 +30,8 @@
 }
 
 #lctimer-settings {
-    flex-basis: 100%;
+    margin: auto;
+    padding: 1em;
+    color: var(--c-font);
+	background: var(--c-bg-box);
 }

@@ -62,6 +62,13 @@ class LCSettings {
         // when dialog closes, update settings and emit event
         this.settingsDialog.addEventListener('close', (e) => {
             let didUpdate = false;
+            if (this.minInput.value == "") {
+                this.minInput.value = Math.floor(this.startTime / 1000 / 60);
+            }
+            if (this.timeInput.value == "") {
+                this.timeInput.value = Math.floor(this.startTime / 1000 % 60);
+            }
+
             let newTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;
             const newMode = this.modeSlow.checked;
             const newAutoFail = this.autoFailBtn.checked;

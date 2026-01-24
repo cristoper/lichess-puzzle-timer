@@ -279,7 +279,7 @@ class LCPuzzleTimer {
         const seconds = (this.time / 1000) % 60;
 
         let fixed = 1;
-        if (seconds > 10) {
+        if (this.time > 10 * 1000) {
             fixed = 0;
         }
 

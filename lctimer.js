@@ -182,6 +182,9 @@ class LCPuzzleTimer {
 
         this.settingsButton = document.getElementById('lctimer-settings-btn');
 
+        // so that we only add a single event listener to cg-board
+        this.boundClickedBoard = this.clickedBoard.bind(this);
+
         // event listeners
         this.settings.events.addEventListener('settingsChanged', (e) => {
             this.reset();
@@ -271,7 +274,7 @@ class LCPuzzleTimer {
 
         // the reference to cg-board can break between puzzles
         this.board = document.querySelector("cg-board");
-        this.board.addEventListener("mousedown", this.clickedBoard.bind(this), true);
+        this.board.addEventListener("mousedown", this.boundClickedBoard, true);
 
         this.render();
     }

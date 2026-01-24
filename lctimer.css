@@ -34,4 +34,21 @@
     padding: 1em;
     color: var(--c-font);
 	background: var(--c-bg-box);
+
+    display: flex;
+    flex-direction: column;
+}
+
+#lctimer-settings .lcsettings-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#lctimer-settings > * {
+    padding-top: 5px;
+    padding-bottom: 5px
+}
+
+#lctimer-settings form {
+    align-self: end;
 }

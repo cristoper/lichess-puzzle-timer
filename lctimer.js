@@ -27,11 +27,13 @@ class LCSettings {
         </div>
     </group>
 
-    <div class="toggle">
-        <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="true" type="checkbox" checked="checked">
-        <label for="autofail-btn"></label>
+    <div class="lcsettings-row">
+        <label for="autofail-btn">Autofail (blitz):</label>
+        <div class="toggle">
+            <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="true" type="checkbox" checked="checked">
+            <label for="autofail-btn"></label>
+        </div>
     </div>
-        <label for="autofail-btn">Autofail (blitz)</label>
 
     <form method="dialog"><button id="doneBtn" class="button">Done</button></form>
 </dialog>

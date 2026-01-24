@@ -6,7 +6,8 @@
   "description": "Adds a timer to lichess puzzles. It has two modes: in Slow mode you will not be able to make a puzzle move until the timer expires to help force you to think through all lines. In Fast mode you must make a move before the timer expires.",
 
   "icons": {
-    "48": "icons/border-48.png"
+    "128": "logo-128x128.png",
+    "48": "logo-48x48.png"
   },
   "permissions": [
     "storage"

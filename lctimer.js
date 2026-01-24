@@ -5,6 +5,7 @@ class LCSettings {
         this.slowMode = true;
         this.autoFail = true;
         this.startTime = 34 * 1000; // ms
+        this.events = new EventTarget();
 
         const template =
 `
@@ -53,10 +54,32 @@ class LCSettings {
 
         // when dialog closes, update settings and emit event
         this.settingsDialog.addEventListener('close', (e) => {
-            this.startTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;
-            this.slowMode = this.modeSlow.checked;
-            this.autoFail = this.autoFailBtn.checked;
+            let didUpdate = false;
+            const newTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;
+            const newMode = this.modeSlow.checked;
+            const newAutoFail = this.autoFailBtn.checked;
+
+            if (this.startTime != newTime) {
+                this.startTime = newTime;
+                didUpdate = true;
+            }
+            if (this.slowMode != newMode) {
+                this.slowMode = newMode;
+                didUpdate = true;
+            }
+            if (this.autoFail != newAutoFail) {
+                this.autoFail = newAutoFail;
+                didUpdate = true;
+            }
+
+            if (didUpdate) {
+                const settingsUpdated = new CustomEvent('settingsChanged', {
+                    detail: {settings: this}
+                });
+                this.events.dispatchEvent(settingsUpdated);
+            }
         });
+
     }
 
     showDialog() {
@@ -99,6 +122,13 @@ class LCPuzzleTimer {
         this.settingsButton = document.getElementById('lctimer-settings-btn');
 
         // event listeners
+        this.settings.events.addEventListener('settingsChanged', (e) => {
+            this.reset();
+            if (this.settings.enabled) {
+                this.start();
+            }
+        });
+
         this.settingsButton.addEventListener('click', this.clickedSettings.bind(this));
 
         this.enableButton = document.getElementById('lctimer-toggle-enabled');

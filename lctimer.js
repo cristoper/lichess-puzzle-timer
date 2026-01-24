@@ -121,7 +121,6 @@ class LCSettings {
     // load settings from chrome.local
     async loadSettings() {
         const settings = chrome.storage.local.get("settings").then((items) => {
-            console.log("loaded settings: ", items);
             if (items.settings) {
                 this.enabled = items.settings.enabled;
                 this.slowMode = items.settings.slowMode;
@@ -216,8 +215,25 @@ class LCPuzzleTimer {
                 if (mutation.type === 'childList') {
                     // if div.puzzle__feedback.after is removed, assume new puzzle
                     for (let node of mutation.removedNodes) {
-                        if (node.classList && node.classList.contains('puzzle__feedback') && node.classList.contains('after')) {
+                        if (node.classList && node.classList.contains('puzzle__feedback')
+                            && node.classList.contains('after'))
+                        {
                             this.newPuzzle();
+                            return;
+                        }
+                    }
+                    // check for success and fail feedback messages
+                    for (let node of mutation.addedNodes) {
+                        if (node.classList && node.classList.contains('puzzle__feedback')
+                            && node.classList.contains('fail'))
+                        {
+                            this.puzzleFailed();
+                            return;
+                        }
+                        if (node.classList && node.classList.contains('puzzle__feedback') && node.classList.contains('after'))
+                        {
+                            this.puzzleSucceeded();
+                            return;
                         }
                     }
                 }
@@ -236,6 +252,17 @@ class LCPuzzleTimer {
     newPuzzle() {
         this.reset();
         this.start();
+    }
+
+    puzzleFailed() {
+        // in Blitz mode when the user fails puzzle
+        // do nothing: all player to keep trying with timer running
+        // this.expired();
+    }
+
+    puzzleSucceeded() {
+        // in Blitz mode when the user succeeds puzzle
+        this.stop();
     }
 
     reset() {

@@ -52,3 +52,6 @@
 #lctimer-settings form {
     align-self: end;
 }
+#lctimer-settings:not([open]) {
+    display: none !important;
+}

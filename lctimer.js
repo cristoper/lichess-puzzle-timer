@@ -407,6 +407,5 @@ window.addEventListener("load", () => {
     const settings = new LCSettings();
     const app = new LCPuzzleTimer(timer, settings);
 
-    window.app = app;
     app.newPuzzle();
 })

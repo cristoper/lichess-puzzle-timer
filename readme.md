@@ -9,7 +9,7 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 
 ## Chrome
 
-* Waiting on approval
+* [Lichess Puzzle Timer in Chrome web store](https://chromewebstore.google.com/detail/lichess-puzzle-timer/mmjgijgmfkhagpfnnafphidhndjjbicc)
 
 ## Firefox
 
@@ -18,6 +18,10 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 ## Safari
 
 * TBD
+
+## Tampermonkey
+
+* The [lctimer.js](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/refs/heads/main/lctimer.js) script can be pasted directly into [Tampermonkey](https://www.tampermonkey.net/)
 
 # Use
 

@@ -3,7 +3,7 @@
   "name": "Lichess Puzzle Timer",
   "version": "1.0",
 
-  "description": "Adds a timer to lichess puzzles. It has two modes: in Slow mode you will not be able to make a puzzle move until the timer expires to help force you to think through all lines. In Fast mode you must make a move before the timer expires.",
+  "description": "Adds a timer to the lichess.org puzzle trainer to help you think through variations before making a move.",
 
   "icons": {
     "128": "logo-128x128.png",

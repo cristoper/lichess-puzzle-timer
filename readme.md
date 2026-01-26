@@ -17,7 +17,14 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 
 ## Safari
 
-* TBD
+This extension works in Safari for macOS, but it is not signed with an Apple developer account so it requires several steps to install:
+
+1. First [enable features for web developers](https://developer.apple.com/documentation/safari-developer-tools/enabling-developer-features) in Safari (Settings > Advanced > check "Show features for web developers")
+2. In Settings > Developer, click "Allow unsigned extensions"
+3. Download and run [Lichess.Puzzle.Timer.app.zip](https://github.com/cristoper/lichess-puzzle-timer/releases/download/v1.1/Lichess.Puzzle.Timer.app.zip). Click "Done" to dismiss the security warning it gives you.
+4. Open your System Settings > Privacy & Security, find the notification that "Lichess Puzzle Timer" was blocked and click "Open Anyway". Click "Open Anyway" when prompted.
+5. In your Safari Settings, go to the Extensions tab. You should see Lichess Puzzle Timer installed. Click the checkbox next to it to enable.
+6. Enjoy!
 
 ## Tampermonkey
 

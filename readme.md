@@ -46,3 +46,7 @@ In this mode you try to make your move *before* the timer runs out. For extra st
 ## Settings
 
 ![Screenshot of settings dialog](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/main/settings.png)
+
+# Other extensions
+
+If you want a lichess puzzle timer extension that will keep track of your solving time (with analytics and everything), check out [this extension by el-tecson](https://github.com/el-tecson/lichess-puzzle-timer/). That extension (unlike this one) also works on Firefox for Android.

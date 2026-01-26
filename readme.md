@@ -25,7 +25,7 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 
 ## Manual
 
-* If your browser allows manually installing a manifest v3 extension, you can download [lichess_puzzle_timer-1.0.zip](https://github.com/cristoper/lichess-puzzle-timer/releases/download/v1.0/lichess_puzzle_timer-1.0.zip)
+* If your browser allows manually installing a manifest v3 extension, you can download [lichess_puzzle_timer-1.1.zip](https://github.com/cristoper/lichess-puzzle-timer/releases/download/v1.1/lichess_puzzle_timer-1.1.zip)
 
 # Use
 

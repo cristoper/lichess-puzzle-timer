@@ -102,10 +102,14 @@
             this.settingsDialog.addEventListener('close', (e) => {
                 let didUpdate = false;
                 if (this.minInput.value == "") {
-                    this.minInput.value = Math.floor(this.startTime / 1000 / 60);
+                    this.minInput.value = 0;
                 }
                 if (this.timeInput.value == "") {
-                    this.timeInput.value = Math.floor(this.startTime / 1000 % 60);
+                    if (this.minInput.value == 0) {
+                        this.timeInput.value = Math.floor(this.startTime / 1000 % 60);
+                    } else {
+                        this.timeInput.value = 0;
+                    }
                 }
 
                 let newTime = (parseInt(this.minInput.value) * 60 + parseInt(this.timeInput.value)) * 1000;

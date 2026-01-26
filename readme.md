@@ -7,7 +7,7 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 
 # Install
 
-## Chrome
+## Chrome / Edge
 
 * [Lichess Puzzle Timer in Chrome web store](https://chromewebstore.google.com/detail/lichess-puzzle-timer/mmjgijgmfkhagpfnnafphidhndjjbicc)
 
@@ -22,6 +22,10 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 ## Tampermonkey
 
 * The [lctimer.js](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/refs/heads/main/lctimer.js) script can be pasted directly into [Tampermonkey](https://www.tampermonkey.net/)
+
+## Manual
+
+* If your browser allows manually installing a manifest v3 extension, you can download [lichess_puzzle_timer-1.0.zip](https://github.com/cristoper/lichess-puzzle-timer/releases/download/v1.0/lichess_puzzle_timer-1.0.zip)
 
 # Use
 

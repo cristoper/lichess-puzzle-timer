@@ -18,9 +18,9 @@
     class Storage {
         static setItem(key, value) {
             if (typeof chrome !== 'undefined' && chrome.storage) {
-                return new Promise((resolve) => {
-                    chrome.storage.local.set({[key]: value}, resolve);
-                });
+                const val = {};
+                val[key] = value;
+                return chrome.storage.local.set(val);
             } else {
                 return GM_setValue(key, value);
             }
@@ -28,11 +28,12 @@
 
         static getItem(key) {
             if (typeof chrome !== 'undefined' && chrome.storage) {
-                return new Promise((resolve) => {
-                    chrome.storage.local.get([key], (result) => resolve(result[key]));
-                });
+                return chrome.storage.local.get(key);
             } else {
-                return GM_getValue(key);
+                let result = {};
+                const v = GM_getValue(key);
+                result[key] = v;
+                return Promise.resolve(result);
             }
         }
     }
@@ -179,12 +180,12 @@
         }
 
         saveSettings() {
-            Storage.setItem({"settings": {
+            Storage.setItem("settings", {
                 enabled: this.enabled,
                 slowMode: this.slowMode,
                 autoFail: this.autoFail,
                 startTime: this.startTime
-            }});
+            });
         }
 
         showDialog() {

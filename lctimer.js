@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Lichess Puzzle Timer
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      1.3
 // @description  Adds a timer to the lichess.org puzzle trainer
-// @author       You
+// @author       https://github.com/cristoper/
 // @match        https://lichess.org/training*
 // @resource     style https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/refs/heads/main/lctimer.css
 // @grant        GM_setValue
@@ -45,7 +45,7 @@
             this.slowMode = true;
             this.autoFail = true;
             this.startTime = 60 * 1000; // ms
-            this.events = new EventTarget();
+            this.settingsCallback = function() {};
 
             const template =
     `
@@ -139,13 +139,15 @@
 
 
                 if (didUpdate) {
-                    const settingsUpdated = new CustomEvent('settingsChanged', {
-                        detail: {settings: this}
-                    });
-                    this.events.dispatchEvent(settingsUpdated);
+                    this.settingsChanged();
                 }
             });
 
+        }
+
+        settingsChanged() {
+            this.settingsCallback();
+            this.updateDOM();
         }
 
         updateDOM() {
@@ -171,11 +173,7 @@
                     this.autoFail = items.settings.autoFail;
                     this.startTime = items.settings.startTime;
                 }
-                this.updateDOM();
-                const settingsUpdated = new CustomEvent('settingsChanged', {
-                    detail: {settings: this}
-                });
-                this.events.dispatchEvent(settingsUpdated);
+                this.settingsChanged();
             });
         }
 
@@ -230,12 +228,12 @@
             this.boundClickedBoard = this.clickedBoard.bind(this);
 
             // event listeners
-            this.settings.events.addEventListener('settingsChanged', (e) => {
+            this.settings.settingsCallback = () => {
                 this.reset();
                 if (this.settings.enabled) {
                     this.start();
                 }
-            });
+            };
 
             this.settingsButton.addEventListener('click', this.clickedSettings.bind(this));
 

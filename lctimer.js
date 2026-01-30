@@ -437,57 +437,29 @@
         document.querySelector(".view_solution").querySelectorAll("a")[1].click();
     }
 
-    function waitForElement(selector) {
-        return new Promise((resolve, reject) => {
-            const element = document.querySelector(selector);
-            if (element) {
-                resolve(element);
-                return;
-            }
-
-            const observer = new MutationObserver((mutations) => {
-                if (document.querySelector(selector)) {
-                    observer.disconnect();
-                    resolve(document.querySelector(selector));
-                }
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true,
-            });
-
-            // set time// Set timeout
-            setTimeout(() => {
-                observer.disconnect();
-                reject(new Error(`Element with selector '${selector}' not found within 1 second`));
-            }, 1000);
-        });
-    }
-
-
-    // set up timer on load
-    window.addEventListener("load", () => {
-
+    function startExt() {
         // tampermonkey: load css
         if (typeof GM_addStyle !== 'undefined') {
             const cssstyle = GM_getResourceText("style");
             GM_addStyle(cssstyle);
         }
- 
-        waitForElement(".puzzle__tools").then((puzzle_tools) => {
 
-            // Create container at top of tools
-            const timer = document.createElement("div")
-            timer.className = "lctimer-container";
-            puzzle_tools.prepend(timer);
+        // Create container at top of tools
+        const puzzle_tools = document.querySelector(".puzzle__tools");
+        const timer = document.createElement("div")
+        timer.className = "lctimer-container";
+        puzzle_tools.prepend(timer);
 
+        const settings = new LCSettings();
+        const app = new LCPuzzleTimer(timer, settings);
 
-            const settings = new LCSettings();
-            const app = new LCPuzzleTimer(timer, settings);
+        app.newPuzzle();
+    }
 
-            app.newPuzzle();
-        });
-    });
-
+    // set up timer on load
+    if (document.readyState === 'complete') {
+        startExt();
+    } else {
+        window.addEventListener("load", startExt);
+    }
 })();

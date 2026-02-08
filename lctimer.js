@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Lichess Puzzle Timer
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.6
 // @description  Adds a timer to the lichess.org puzzle trainer
 // @author       https://github.com/cristoper/
 // @match        https://lichess.org/training*

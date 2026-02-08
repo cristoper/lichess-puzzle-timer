@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Lichess Puzzle Timer",
-  "version": "1.5",
+  "version": "1.6",
 
   "description": "Adds a timer to the lichess.org puzzle trainer to help you think through variations before making a move.",
 

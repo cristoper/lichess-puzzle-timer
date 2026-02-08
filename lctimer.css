@@ -7,7 +7,7 @@
     flex-wrap: wrap;
 }
 
-.lctimer-container .switch {
+.lctimer-container .cmn-toggle {
     display: flex;
 	flex: 0 0 40px;
 	margin-inline-start: 6px;

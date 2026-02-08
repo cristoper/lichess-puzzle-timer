@@ -69,7 +69,7 @@
 
         <div class="lcsettings-row">
             <label for="autofail-btn">Autofail (lose points if too slow):</label>
-            <div class="toggle">
+            <div class="cmn-toggle">
                 <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="true" type="checkbox" checked="checked">
                 <label for="autofail-btn"></label>
             </div>
@@ -206,7 +206,7 @@
             this.flashBG = false;
 
             const template = `
-    <div class="switch" role="button" title="Toggle Lichess Timer Extension">
+    <div class="cmn-toggle" role="button" title="Toggle Lichess Timer Extension">
     <input id="lctimer-toggle-enabled" class="cmn-toggle cmn-toggle--subtle" type="checkbox">
     <label for="lctimer-toggle-enabled"></label>
     </div>

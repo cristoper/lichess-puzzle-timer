@@ -33,7 +33,7 @@ This extension works as a native extension in Safari for macOS, but it is not si
 
 ## Manual
 
-* If your browser allows manually installing a manifest v3 extension, you can download [lichess_puzzle_timer-1.5.zip](https://github.com/cristoper/lichess-puzzle-timer/releases/download/v1.5/lichess_puzzle_timer-1.5.zip)
+* If your browser allows manually installing a manifest v3 extension, you can download [lichess_puzzle_timer-1.6.zip](https://github.com/cristoper/lichess-puzzle-timer/releases/download/v1.6/lichess_puzzle_timer-1.6.zip)
 
 # Use
 

@@ -43,7 +43,7 @@
             // TODO set/get settings from local storage
             this.enabled = true;
             this.slowMode = true;
-            this.autoFail = true;
+            this.autoFail = false;
             this.startTime = 60 * 1000; // ms
             this.settingsCallback = function() {};
 
@@ -70,7 +70,7 @@
         <div class="lcsettings-row">
             <label for="autofail-btn">Autofail (lose points if too slow):</label>
             <div class="cmn-toggle">
-                <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="true" type="checkbox" checked="checked">
+                <input id="autofail-btn" class="form-control cmn-toggle" name="autofail" value="false" type="checkbox" checked="unchecked">
                 <label for="autofail-btn"></label>
             </div>
         </div>

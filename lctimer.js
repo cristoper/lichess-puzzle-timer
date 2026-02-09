@@ -422,7 +422,8 @@
         clickedBoard(event) {
             // user tried to click board while locked, flash the background
             // and block event
-            if (this.running && this.settings.enabled && this.settings.slowMode ) {
+            const leftButton = event.button === 0;
+            if (this.running && this.settings.enabled && this.settings.slowMode && leftButton) {
                 this.flashBG = true;
                 setTimeout(() => {
                     this.flashBG = false;

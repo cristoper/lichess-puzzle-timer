@@ -13,7 +13,7 @@ This browser extension adds a timer to the lichess.org puzzle trainer. It has tw
 
 ## Firefox
 
-* Waiting on approval
+* [Lichess puzzle Timer on Firefox Add-Ons Site](https://addons.mozilla.org/en-US/firefox/addon/lichess-puzzle-wait-timer/)
 
 ## Tampermonkey (Chrome, Firefox, Safari, Opera Next)
 

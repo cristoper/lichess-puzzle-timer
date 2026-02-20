@@ -301,7 +301,7 @@
 
         puzzleFailed() {
             // in Blitz mode when the user fails puzzle
-            // do nothing: all player to keep trying with timer running
+            // do nothing: allow player to keep trying with timer running
             // this.expired();
         }
 

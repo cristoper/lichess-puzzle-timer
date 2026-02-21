@@ -1,6 +1,10 @@
 # Intro
 
-This browser extension adds a timer to the lichess.org puzzle trainer. It has two modes:
+This browser extension adds a timer to the [lichess.org puzzle trainer](https://lichess.org/training). Unlike other timers, this one _prevents_ you from making a move until the timer expires to try to help you force yourself into actually calculating all variations. It also has a traditional blitz mode if you prefer.
+
+Once installed it should add the timer above the move list on puzzle pages. You can disable/enable it with the toggle to the left of the timer, and change settings by clicking on the gear icon to the right of the timer.
+
+From the settings dialog, you can switch modes:
 
 * **Thinking mode** - prevents you from making a move until the timer reaches zero to encourage you to calculate all variations before just making the first move you see. 
 * **Blitz mode** - you must move before the timer reaches zero. Or else. For more fun, you can enable "auto fail" so that if you don't complete the puzzle on time, the extension will click "view the solution" automatically and you'll fail the puzzle. If you like Puzzle Storm but wish you could lose real puzzle rating points, try this mode with 10 seconds and "Jump to next puzzle immediately" option enabled.
@@ -39,21 +43,22 @@ This extension works as a native extension in Safari for macOS, but it is not si
 
 When the extenion is installed, lichess.org puzzle trainer pages will have a timer added above the move list. (Circled in green in screenshot below.)
 
-To enable the timer, simply toggle the switch. By default it is in Thinking mode. Click the gear icon to change the mode and set the time.
-
 ![Screenshot with timer circled](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/main/screenshot-full-circle.png)
 
-## Thinking mode
+To enable the timer, simply toggle the switch. By default it is in Thinking mode. Click the gear icon to open the settings dialog where you can change the mode and set the time.
 
-In this mode the board will have a red outline and you will not be able to make a move until the timer expires. Use this time to force yourself to calculate your candidate variations and consider all responses. Once the timer reaches zero, the board outline will turn green and you may make your move.
+![Screenshot of settings dialog](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/main/settings.png)
+
+
+## Thinking mode
+This is the default mode. In this mode the board will have a red outline and you will not be able to make a move until the timer expires. Use this time to force yourself to calculate your candidate variations and consider all responses. Once the timer reaches zero, the board outline will turn green and you may make your move.
+
+While the board outline is red you *can* right click to draw arrows. To erase arrows, draw another one on top of the arrow you wish to erase.
 
 ## Blitz mode
 
 In this mode you try to make your move *before* the timer runs out. For extra stakes, enable "autofail" mode so that if you have not solved the puzzle in time it is automatically failed.
 
-## Settings
-
-![Screenshot of settings dialog](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/main/settings.png)
 
 # Other extensions
 

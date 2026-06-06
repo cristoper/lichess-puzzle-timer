@@ -436,7 +436,7 @@
     }
 
     function clickViewSolution() {
-        document.querySelector(".view_solution").querySelectorAll("a")[1].click();
+        document.querySelector(".view_solution").querySelectorAll("button")[1].click();
     }
 
     function startExt() {

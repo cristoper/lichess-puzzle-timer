@@ -41,7 +41,7 @@ This extension works as a native extension in Safari for macOS, but it is not si
 
 # Use
 
-When the extenion is installed, lichess.org puzzle trainer pages will have a timer added above the move list. (Circled in green in screenshot below.)
+When the extension is installed, lichess.org puzzle trainer pages will have a timer added above the move list. (Circled in green in screenshot below.)
 
 ![Screenshot with timer circled](https://raw.githubusercontent.com/cristoper/lichess-puzzle-timer/main/screenshot-full-circle.png)
 

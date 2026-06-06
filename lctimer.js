@@ -2,7 +2,7 @@
 // @name         Lichess Puzzle Timer
 // @namespace    http://tampermonkey.net/
 // @license      MIT
-// @version      1.7
+// @version      1.8
 // @description  Adds a timer to the lichess.org puzzle trainer
 // @author       https://github.com/cristoper/
 // @match        https://lichess.org/training*

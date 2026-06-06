@@ -59,6 +59,25 @@ While the board outline is red you *can* right click to draw arrows. To erase ar
 
 In this mode you try to make your move *before* the timer runs out. For extra stakes, enable "autofail" mode so that if you have not solved the puzzle in time it is automatically failed.
 
+## Building and testing
+
+I use Firefox's [web-ext tool](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) to build the extension. From the `src` directory,
+
+To test:
+
+```
+web-ext run
+```
+
+To release:
+
+- Update version in manifest.json
+- Update Tampermonkey version in lctimer.js
+- `git tag v1.x`
+- `web-ext build --overwrite-dest`
+- Upload .zip from web-ext-artifacts/ to github, firefox, and chrome store
+- Update readme.md
+
 
 # Other extensions
 
